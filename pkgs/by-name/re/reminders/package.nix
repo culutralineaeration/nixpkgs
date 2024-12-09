@@ -64,6 +64,10 @@ python3.pkgs.buildPythonApplication {
 
   postFixup = ''
     wrapPythonProgramsIn $out/libexec $out $pythonPath
+
+    # We don't want store paths in desktop files
+    desktop-file-edit --set-key Exec --set-value "reminders %U" \
+      $out/share/applications/io.github.remindersdevs.Reminders.desktop
   '';
 
   # NOTE: `postCheck` is intentionally not used here, as the entire checkPhase

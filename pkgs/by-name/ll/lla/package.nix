@@ -45,10 +45,10 @@ rustPlatform.buildRustPackage {
   passthru.updateScript = nix-update-script { };
 
   meta = {
-    description = "Modern alternative to ls";
+    description = "Blazing-fast `ls` replacement with superpowers";
     longDescription = ''
-      `lla` is a high-performance, extensible alternative to the traditional ls command, written in Rust.
-      It offers enhanced functionality, customizable output, and a plugin system for extended capabilities.
+      `lla` is a high-performance file explorer written in Rust that enhances the traditional
+      `ls` command with modern features, rich formatting options, and a powerful plugin system.
     '';
     homepage = "https://github.com/triyanox/lla";
     changelog = "https://github.com/triyanox/lla/blob/refs/tags/v${version}/CHANGELOG.md";

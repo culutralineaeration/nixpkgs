@@ -3,6 +3,7 @@
   rustPlatform,
   fetchFromGitHub,
   makeBinaryWrapper,
+  installShellFiles,
   versionCheckHook,
   nix-update-script,
 }:
@@ -16,15 +17,22 @@ rustPlatform.buildRustPackage {
   src = fetchFromGitHub {
     owner = "triyanox";
     repo = "lla";
-    rev = "refs/tags/v${version}";
+    tag = "v${version}";
     hash = "sha256-8BnYLC5SGFvk9srRyLxflDgfVbbGMSHXBOjXQLMLIi8=";
   };
 
-  nativeBuildInputs = [ makeBinaryWrapper ];
+  nativeBuildInputs = [
+    makeBinaryWrapper
+    installShellFiles
+  ];
 
   cargoHash = "sha256-H/BnJiR9+wcddAEWkKaqamTEDgjTUOMq1AiGWQAfjDM=";
 
   cargoBuildFlags = [ "--workspace" ];
+
+  postInstall = ''
+    installShellCompletion completions/{_lla,lla{.bash,.fish}}
+  '';
 
   postFixup = ''
     wrapProgram $out/bin/lla \
